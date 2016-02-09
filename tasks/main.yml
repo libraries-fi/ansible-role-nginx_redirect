@@ -1,0 +1,27 @@
+---
+# tasks file for kifi.nginx_redirect
+
+- name: nginx config for host
+  template:
+    src={{ nginx_redirect_template }}
+    dest=/etc/nginx/sites-available/{{nginx_redirect_file}}
+    owner=root
+    group=root
+    mode=0644
+  register: nginx_redirect_config
+
+- name: Check the redirect config exists.
+  stat: path=/etc/nginx/sites-available/{{nginx_redirect_file}}
+  register: redirect_config
+
+
+- name: Enable site in nginx config
+  file:
+    src=/etc/nginx/sites-available/{{ nginx_redirect_file }}
+    dest=/etc/nginx/sites-enabled/{{ nginx_redirect_file }}
+    owner=root
+    group=root
+    state=link
+  when: redirect_config.stat.exists
+  notify:
+    - reload nginx

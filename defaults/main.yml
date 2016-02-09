@@ -1,0 +1,4 @@
+---
+# defaults file for kifi.nginx_redirect
+nginx_redirect_template: redirect.j2
+nginx_redirect_file: "{{ nginx_redirect_name }}-redirect"

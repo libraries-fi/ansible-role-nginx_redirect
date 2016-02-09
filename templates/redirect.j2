@@ -1,0 +1,5 @@
+server {
+	listen 80;
+	server_name {{ nginx_redirect_name }} www.{{ nginx_redirect_name }};
+	return 301 $scheme://{{ nginx_redirect_destination }};
+}
