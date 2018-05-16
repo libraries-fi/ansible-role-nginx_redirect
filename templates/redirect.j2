@@ -1,5 +1,10 @@
 server {
-	listen 80;
-	server_name {{ nginx_redirect_name }} www.{{ nginx_redirect_name }};
-	return 301 $scheme://{{ nginx_redirect_destination }};
+        {% for listen_value in nginx_redirect_listen %}listen {{ listen_value }};
+{% endfor %}
+{% if nginx_redirect_ssl %}
+        ssl_certificate {{ ssl_certificate_certificate_dir }}/{{ ssl_certificate_chained }};
+        ssl_certificate_key {{ ssl_certificate_key_dir }}/{{ ssl_certificate_key }};
+{% endif %}
+	server_name {{ nginx_redirect_name }}{% if nginx_redirect_www %} www.{{ nginx_redirect_name }}{% endif %};
+	return 301 {{ nginx_redirect_scheme }}://{{ nginx_redirect_destination }};
 }

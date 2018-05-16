@@ -2,3 +2,8 @@
 # defaults file for kifi.nginx_redirect
 nginx_redirect_template: redirect.j2
 nginx_redirect_file: "{{ nginx_redirect_name }}-redirect"
+nginx_redirect_scheme: "$scheme"
+nginx_redirect_www: yes
+nginx_redirect_listen:
+  - 80
+nginx_redirect_ssl: no
