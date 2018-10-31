@@ -1,11 +1,6 @@
 ---
 # tasks file for kifi.nginx_redirect
 
-- name: Set nginx_redirect_file default value.
-  set_fact:
-    nginx_redirect_file: "{{ nginx_redirect_name }}-redirect"
-  when: nginx_redirect_file is undefined
-
 - name: nginx config for host
   template:
     src={{ nginx_redirect_template }}
